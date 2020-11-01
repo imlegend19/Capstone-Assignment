@@ -19,6 +19,9 @@ class Book(db.Model):
     def __repr__(self):
         return "<Title: {}>".format(self.title)
 
+    def __str__(self):
+        return f"Title: {self.title}"
+
 
 @app.before_first_request
 def create_tables():
