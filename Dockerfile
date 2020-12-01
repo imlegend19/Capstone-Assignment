@@ -22,4 +22,4 @@ RUN pip --no-cache-dir install -r requirements.txt
 EXPOSE 5000
 
 ENTRYPOINT [ "python3" ]
-CMD [ "app.py" ]
+CMD [ "run_server.py" ]

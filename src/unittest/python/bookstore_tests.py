@@ -1,14 +1,13 @@
-import os
 import unittest
 
-from app import app, basedir, db, Book
+from bookstore.app import *
 
 
-class TestCase(unittest.TestCase):
+class BookstoreTest(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'capstone.db')
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'bookstore.db')
 
         self.app = app.test_client()
         db.create_all()
@@ -18,9 +17,9 @@ class TestCase(unittest.TestCase):
         db.drop_all()
 
     def test_crud_book(self):
-        b1 = Book(title="Book 1")
-        b2 = Book(title="Book 2")
-        b3 = Book(title="Book 3")
+        b1 = Book(title="Book #1")
+        b2 = Book(title="Book #2")
+        b3 = Book(title="Book #3")
 
         db.session.add(b1)
         db.session.add(b2)
@@ -30,10 +29,10 @@ class TestCase(unittest.TestCase):
         all_books = Book.query.all()
         self.assertEqual(len(set(all_books).intersection({b1, b2, b3})) == 3, True)
 
-        b1.title = "Updated Book 1"
+        b1.title = "Updated Book #1"
         db.session.commit()
 
-        self.assertEqual(b1.title, "Updated Book 1")
+        self.assertEqual(b1.title, "Updated Book #1")
 
         db.session.delete(b1)
         db.session.delete(b2)
