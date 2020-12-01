@@ -1,4 +1,5 @@
-from bookstore.app import app
+from sys import path 
+path.append("src/main/python")
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+from bookstore.app import app
+app.run(host='0.0.0.0', port=5000, debug=True)
