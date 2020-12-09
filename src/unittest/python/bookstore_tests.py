@@ -36,7 +36,7 @@ class BookstoreTest(unittest.TestCase):
 
         db.session.delete(b1)
         db.session.delete(b2)
-        db.session.delete(b3)
+        #db.session.delete(b3)
         db.session.commit()
 
         all_books = Book.query.all()
